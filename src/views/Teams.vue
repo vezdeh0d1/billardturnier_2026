@@ -5,12 +5,15 @@
         <h2 class="section-title">Teams</h2>
       </div>
 
-      <div class="teams-grid">
+      <p v-if="loading" class="section-text">Loading teams...</p>
+      <p v-else-if="error" class="section-text">{{ error }}</p>
+
+      <div v-else class="teams-grid">
         <article
           v-for="team in teams"
           :key="team.id"
           :id="team.anchor"
-          class="team-card"
+          class="team-card surface-card"
         >
           <div class="team-card-top">
             <h3 class="team-name">{{ team.name }}</h3>
@@ -36,14 +39,33 @@
 </template>
 
 <script>
-import { teams } from "../data/teams";
+const APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbx5kwyVcfuK5sxtpDUbPuI412av7GBeMR6SIoQ9aqlv-C4y7dpqFBNlgViRX-aZPEg/exec";
 
 export default {
   name: "Teams",
   data() {
     return {
-      teams,
+      teams: [],
+      loading: true,
+      error: "",
     };
+  },
+  async mounted() {
+    try {
+      const response = await fetch(`${APPS_SCRIPT_URL}?action=teams`);
+
+      if (!response.ok) {
+        throw new Error(`Teams request failed: ${response.status}`);
+      }
+
+      this.teams = await response.json();
+    } catch (err) {
+      console.error("Teams loading error:", err);
+      this.error = `Could not load teams: ${err.message}`;
+    } finally {
+      this.loading = false;
+    }
   },
 };
 </script>

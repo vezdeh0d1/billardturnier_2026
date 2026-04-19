@@ -11,7 +11,10 @@
         </p>
       </div>
 
-      <div class="table-wrapper">
+      <p v-if="loading" class="section-text">Loading group stage data...</p>
+      <p v-else-if="error" class="section-text">{{ error }}</p>
+
+      <div v-else class="table-wrapper">
         <table class="group-table">
           <thead>
             <tr>
@@ -46,7 +49,7 @@
                 :class="{ diagonal: rowIndex === colIndex }"
               >
                 <span v-if="rowIndex === colIndex">—</span>
-                <span v-else>{{ matches[rowIndex][colIndex] }}</span>
+                <span v-else>{{ getScore(rowTeam.name, colTeam.name) }}</span>
               </td>
             </tr>
           </tbody>
@@ -57,23 +60,72 @@
 </template>
 
 <script>
-import { teams } from "../data/teams";
-import { matches } from "../data/groupStage";
+const APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxYan17E9mWheNcNJWhUfn8mZd2xawJawt4R5wjUVXytGNzSG8vRHSvHLk5oSQpnA/exec";
 
 export default {
   name: "GroupStage",
   data() {
     return {
-      teams,
-      matches,
+      teams: [],
+      matches: [],
+      loading: true,
+      error: "",
     };
+  },
+  async mounted() {
+    try {
+      const [teamsRes, matchesRes] = await Promise.all([
+        fetch(`${APPS_SCRIPT_URL}?action=teams`),
+        fetch(`${APPS_SCRIPT_URL}?action=groupStage`),
+      ]);
+
+      if (!teamsRes.ok) {
+        throw new Error(`Teams request failed: ${teamsRes.status}`);
+      }
+
+      if (!matchesRes.ok) {
+        throw new Error(`Group stage request failed: ${matchesRes.status}`);
+      }
+
+      this.teams = await teamsRes.json();
+      this.matches = await matchesRes.json();
+    } catch (err) {
+      console.error("GroupStage loading error:", err);
+      this.error = `Could not load group stage data: ${err.message}`;
+    } finally {
+      this.loading = false;
+    }
   },
   methods: {
     scrollToTeam(anchor) {
       const el = document.getElementById(anchor);
       if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        el.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }
+    },
+    getScore(teamA, teamB) {
+      const directMatch = this.matches.find(
+        (match) => match.team1 === teamA && match.team2 === teamB,
+      );
+
+      if (directMatch) {
+        return directMatch.score;
+      }
+
+      const reverseMatch = this.matches.find(
+        (match) => match.team1 === teamB && match.team2 === teamA,
+      );
+
+      if (reverseMatch) {
+        const [left, right] = String(reverseMatch.score).split(":");
+        return `${right}:${left}`;
+      }
+
+      return "0:0";
     },
   },
 };
