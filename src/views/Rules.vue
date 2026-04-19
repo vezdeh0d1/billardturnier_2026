@@ -5,9 +5,9 @@
         <p class="section-title">League Phase</p>
 
         <p class="rules-text">
-          Bursen-Billardturnier wieder aufleben. In Teams von zwei Personen
-          könnt ihr herausfinden, wer die besten Billardspieler*innen der Burse
-          sind.
+          Nach langer Pause lassen wir das Bursen-Billardturnier wieder
+          aufleben. In Teams von zwei Personen könnt ihr herausfinden, wer die
+          besten Billardspieler*innen der Burse sind.
         </p>
 
         <div class="rules-block">
