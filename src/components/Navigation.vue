@@ -1,10 +1,6 @@
 <template>
   <header class="site-header" :class="{ 'scrolled-nav': scrolledNav }">
     <nav class="container nav-inner">
-      <div class="branding">
-        <h1>BILLIARDTURNIER 2026</h1>
-      </div>
-
       <ul class="navigation">
         <li>
           <a class="link" href="#rules" @click.prevent="scrollToRules">Rules</a>
@@ -93,26 +89,19 @@ export default {
   transition: padding 0.35s ease 0.08s;
 }
 
-.branding h1 {
-  margin: 0;
-  line-height: 1;
-  font-size: 24px;
-  font-weight: 600;
-}
-
 .navigation {
   display: flex;
   align-items: center;
   gap: 24px;
   list-style: none;
-  margin: 0;
+  margin: 0 0 0 auto;
   padding: 0;
 }
 
 .link {
   color: #fff;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 24px;
   text-decoration: none;
   padding-bottom: 4px;
   border-bottom: 1px solid transparent;

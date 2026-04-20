@@ -1,6 +1,10 @@
 <template>
   <section id="rules" class="section rules-section">
     <div class="container">
+      <div class="branding">
+        <h1>BILLIARDTURNIER 2026</h1>
+      </div>
+
       <div class="rules-card">
         <p class="section-title">League Phase</p>
 
@@ -159,6 +163,14 @@ export default {
 .rules-list li {
   margin-bottom: 12px;
   line-height: 1.7;
+}
+
+.branding h1 {
+  margin: 0;
+  line-height: 1;
+  font-size: 34px;
+  font-weight: 600;
+  padding: 0 0 40px 40px;
 }
 
 @media (max-width: 768px) {

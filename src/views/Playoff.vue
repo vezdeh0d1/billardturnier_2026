@@ -21,7 +21,7 @@
 
           <div class="node" style="left: 0px; top: 220px">
             <MatchCard
-              round="TBD"
+              round="Upper Bracket"
               team1="TBD"
               team2="TBD"
               team1Href="#team-3"
