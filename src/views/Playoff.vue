@@ -10,10 +10,10 @@
           <div class="node" style="left: 0px; top: 20px">
             <MatchCard
               round="Upper Bracket"
-              team1="TBD"
-              team2="TBD"
-              team1Href="#team-1"
-              team2Href="#team-2"
+              team1="Benno & Lukas"
+              team2="Chronisten"
+              team1Href="#team-8"
+              team2Href="#team-4"
               :score1="0"
               :score2="0"
             />
@@ -22,10 +22,10 @@
           <div class="node" style="left: 0px; top: 220px">
             <MatchCard
               round="Upper Bracket"
-              team1="TBD"
-              team2="TBD"
-              team1Href="#team-3"
-              team2Href="#team-4"
+              team1="Jana & Hannah"
+              team2="Die schiefen Queues"
+              team1Href="#team-6"
+              team2Href="#team-3"
               :score1="0"
               :score2="0"
             />
@@ -46,10 +46,10 @@
           <div class="node" style="left: 0px; top: 470px">
             <MatchCard
               round="Lower Bracket"
-              team1="TBD"
-              team2="TBD"
-              team1Href="#team-5"
-              team2Href="#team-6"
+              team1="Olymp"
+              team2="Julia & Viki"
+              team1Href="#team-2"
+              team2Href="#team-7"
               :score1="0"
               :score2="0"
             />
@@ -58,10 +58,10 @@
           <div class="node" style="left: 0px; top: 670px">
             <MatchCard
               round="Lower Bracket"
-              team1="TBD"
-              team2="TBD"
-              team1Href="#team-7"
-              team2Href="#team-8"
+              team1="Killer3000"
+              team2="Pooling around"
+              team1Href="#team-1"
+              team2Href="#team-5"
               :score1="0"
               :score2="0"
             />
